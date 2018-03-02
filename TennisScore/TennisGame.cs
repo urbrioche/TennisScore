@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace TennisScore
 {
@@ -15,7 +15,7 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
-            throw new NotImplementedException();
+            return game.ScoreResult();
         }
     }
 }
