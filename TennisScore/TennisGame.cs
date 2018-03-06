@@ -23,6 +23,7 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
+
             if (game.FirstPlayerScore == game.SecondPlayerScore && game.FirstPlayerScore == 3)
             {
                 return "Deuce";
@@ -30,11 +31,26 @@ namespace TennisScore
 
             if (game.FirstPlayerScore == game.SecondPlayerScore)
             {
-                return  _scoreLookup[game.FirstPlayerScore] + " All";
+                return _scoreLookup[game.FirstPlayerScore] + " All";
             }
-            
 
-            throw new NotImplementedException();
+            if (game.FirstPlayerScore >= 4 || game.SecondPlayerScore >= 4 && Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
+            {
+                return (game.FirstPlayerScore > game.SecondPlayerScore
+                           ? game.FirstPlayerName
+                           : game.SecondPlayerName) +
+                       " Adv";
+            }
+
+            if (game.FirstPlayerScore >= 4 || game.SecondPlayerScore >= 4 &&
+                Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 2)
+            {
+                return (game.FirstPlayerScore > game.SecondPlayerScore
+                    ? game.FirstPlayerName
+                    : game.SecondPlayerName) + " Win";
+            }
+
+            return _scoreLookup[game.FirstPlayerScore] + " " + _scoreLookup[game.SecondPlayerScore];
 
         }
     }
