@@ -23,35 +23,69 @@ namespace TennisScore
         {
             var game = this._repo.GetGame(gameId);
 
-
-            if (game.FirstPlayerScore == game.SecondPlayerScore && game.FirstPlayerScore == 3)
+            if (IsSameScore(game))
             {
-                return "Deuce";
+                return IsDeuce(game) ? "Deuce" : $"{ _scoreLookup[game.FirstPlayerScore] } All";
             }
 
-            if (game.FirstPlayerScore == game.SecondPlayerScore)
+            if (IsReadyForWin(game) && Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
             {
-                return _scoreLookup[game.FirstPlayerScore] + " All";
+                return $"{ AdvPlayer(game) } Adv";
             }
 
-            if (game.FirstPlayerScore >= 4 || game.SecondPlayerScore >= 4 && Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
+            if (IsReadyForWin(game) && Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 2)
             {
-                return (game.FirstPlayerScore > game.SecondPlayerScore
-                           ? game.FirstPlayerName
-                           : game.SecondPlayerName) +
-                       " Adv";
+                return $"{ AdvPlayer(game) } Win";
             }
+            //if (game.FirstPlayerScore == game.SecondPlayerScore && game.FirstPlayerScore == 3)
+            //{
+            //    return "Deuce";
+            //}
 
-            if (game.FirstPlayerScore >= 4 || game.SecondPlayerScore >= 4 &&
-                Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 2)
-            {
-                return (game.FirstPlayerScore > game.SecondPlayerScore
-                    ? game.FirstPlayerName
-                    : game.SecondPlayerName) + " Win";
-            }
+            //if (game.FirstPlayerScore == game.SecondPlayerScore)
+            //{
+            //    return _scoreLookup[game.FirstPlayerScore] + " All";
+            //}
+
+            //if (game.FirstPlayerScore >= 4 || game.SecondPlayerScore >= 4 && Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 1)
+            //{
+            //    return (game.FirstPlayerScore > game.SecondPlayerScore
+            //               ? game.FirstPlayerName
+            //               : game.SecondPlayerName) +
+            //           " Adv";
+            //}
+
+            //if (game.FirstPlayerScore >= 4 || game.SecondPlayerScore >= 4 &&
+            //    Math.Abs(game.FirstPlayerScore - game.SecondPlayerScore) == 2)
+            //{
+            //    return (game.FirstPlayerScore > game.SecondPlayerScore
+            //        ? game.FirstPlayerName
+            //        : game.SecondPlayerName) + " Win";
+            //}
 
             return _scoreLookup[game.FirstPlayerScore] + " " + _scoreLookup[game.SecondPlayerScore];
 
+        }
+
+        private static bool IsReadyForWin(Game game)
+        {
+            var isReadyForWin = game.FirstPlayerScore > 3 || game.SecondPlayerScore > 3;
+            return isReadyForWin;
+        }
+
+        private static string AdvPlayer(Game game)
+        {
+            return game.FirstPlayerScore > game.SecondPlayerScore ? game.FirstPlayerName : game.SecondPlayerName;
+        }
+
+        private static bool IsDeuce(Game game)
+        {
+            return game.FirstPlayerScore == 3;
+        }
+
+        private static bool IsSameScore(Game game)
+        {
+            return game.FirstPlayerScore == game.SecondPlayerScore;
         }
     }
 }

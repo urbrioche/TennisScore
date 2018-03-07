@@ -26,7 +26,7 @@ namespace TennisScore
         [TestMethod]
         public void Fifteen_All()
         {
-            GivenGame(new Game{ Id = AnyGameId, FirstPlayerScore = 1, SecondPlayerScore = 1});
+            GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 1, SecondPlayerScore = 1 });
             ScoreShouldBe("Fifteen All");
         }
 
@@ -44,6 +44,27 @@ namespace TennisScore
             ScoreShouldBe("Deuce");
         }
 
+        //[TestMethod]
+        //public void Fifteen_All()
+        //{
+        //    GivenGame(new Game{ Id = AnyGameId, FirstPlayerScore = 1, SecondPlayerScore = 1});
+        //    ScoreShouldBe("Fifteen All");
+        //}
+
+        //[TestMethod]
+        //public void Thirty_All()
+        //{
+        //    GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 2, SecondPlayerScore = 2 });
+        //    ScoreShouldBe("Thirty All");
+        //}
+
+        //[TestMethod]
+        //public void Deuce()
+        //{
+        //    GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 3, SecondPlayerScore = 3 });
+        //    ScoreShouldBe("Deuce");
+        //}
+
         [TestMethod]
         public void Fifteen_Love()
         {
@@ -52,17 +73,17 @@ namespace TennisScore
         }
 
         [TestMethod]
-        public void Thirty_Fifteen()
+        public void Thirty_Love()
         {
-            GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 2, SecondPlayerScore = 1 });
-            ScoreShouldBe("Thirty Fifteen");
+            GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 2, SecondPlayerScore = 0 });
+            ScoreShouldBe("Thirty Love");
         }
 
         [TestMethod]
-        public void Forty_Fifteen()
+        public void Forty_Love()
         {
-            GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 3, SecondPlayerScore = 1 });
-            ScoreShouldBe("Forty Fifteen");
+            GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 3, SecondPlayerScore = 0 });
+            ScoreShouldBe("Forty Love");
         }
 
         [TestMethod]
@@ -71,6 +92,27 @@ namespace TennisScore
             GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 4, SecondPlayerScore = 3, FirstPlayerName = "Joey" });
             ScoreShouldBe("Joey Adv");
         }
+
+        //[TestMethod]
+        //public void Thirty_Fifteen()
+        //{
+        //    GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 2, SecondPlayerScore = 1 });
+        //    ScoreShouldBe("Thirty Fifteen");
+        //}
+
+        //[TestMethod]
+        //public void Forty_Fifteen()
+        //{
+        //    GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 3, SecondPlayerScore = 1 });
+        //    ScoreShouldBe("Forty Fifteen");
+        //}
+
+        //[TestMethod]
+        //public void FirstPlayer_Advance()
+        //{
+        //    GivenGame(new Game { Id = AnyGameId, FirstPlayerScore = 4, SecondPlayerScore = 3, FirstPlayerName = "Joey" });
+        //    ScoreShouldBe("Joey Adv");
+        //}
 
         [TestMethod]
         public void SecondPlayer_Advance()
